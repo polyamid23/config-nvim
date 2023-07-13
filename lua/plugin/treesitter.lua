@@ -12,8 +12,6 @@ configs.setup({
         "javascript",
         "html",
         "php",
-        "typescript",
-        "vue",
     },
     sync_install = false,
     highlight = { enable = true },
