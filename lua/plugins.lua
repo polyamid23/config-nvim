@@ -46,10 +46,10 @@ require("lazy").setup({
       { 'mhinz/vim-startify' },
       -- themes
       { 'gruvbox-community/gruvbox' },
+      -- gitsigns
+      { 'lewis6991/gitsigns.nvim' },
     }
   },
-
-
 }, opts)
 
 
