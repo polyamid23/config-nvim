@@ -21,5 +21,6 @@
         "/home/arne23/.local/state/nvim/lazy/readme",
         "/home/arne23/.local/share/nvim/lazy/cmp-nvim-lsp/after",
         "${3rd}/luassert/library"
-    ]
+    ],
+    "workspace.checkThirdParty": false
 }

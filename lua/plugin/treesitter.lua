@@ -12,7 +12,6 @@ configs.setup({
         "javascript",
         "html",
         "php",
-        "python",
         "typescript",
         "vue",
     },
