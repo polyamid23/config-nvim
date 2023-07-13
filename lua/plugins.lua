@@ -48,6 +48,8 @@ require("lazy").setup({
       { 'gruvbox-community/gruvbox' },
       -- gitsigns
       { 'lewis6991/gitsigns.nvim' },
+      -- tpope commentary
+      { 'tpope/vim-commentary' },
     }
   },
 }, opts)
