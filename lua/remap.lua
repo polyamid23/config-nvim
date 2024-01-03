@@ -1,4 +1,5 @@
-vim.keymap.set("n", "<leader>;;", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>;;", ":Neotree toggle<CR>")
+vim.keymap.set("n", "<leader>kk", ":Neotree reveal<CR>")
 
 -- jk to escape
 vim.keymap.set("i", "jk", "<Esc>")

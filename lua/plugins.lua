@@ -19,6 +19,12 @@ require("lazy").setup({
     tag = '0.1.2',
     dependencies = { 'nvim-lua/plenary.nvim' }
   },
+  -- themes
+  { 'gruvbox-community/gruvbox' },
+  -- gitsigns
+  { 'lewis6991/gitsigns.nvim' },
+  -- tpope commentary
+  { 'tpope/vim-commentary' },
 
   {
     "nvim-treesitter/nvim-treesitter", build = ":TSUpdate"
@@ -36,21 +42,37 @@ require("lazy").setup({
         end,
       },
       { 'williamboman/mason-lspconfig.nvim' },       -- Optional
-
+      -- formatter
+      {
+        'stevearc/conform.nvim',
+        opts = {},
+      },
       -- Autocompletion
       { 'hrsh7th/nvim-cmp' },           -- Required
       { 'hrsh7th/cmp-nvim-lsp' },       -- Required
       { 'L3MON4D3/LuaSnip' },           -- Required
       { 'nvim-cmp' },
-      { 'github/copilot.vim' },
+      -- { 'github/copilot.vim' },
       { 'mhinz/vim-startify' },
-      -- themes
-      { 'gruvbox-community/gruvbox' },
-      -- gitsigns
-      { 'lewis6991/gitsigns.nvim' },
-      -- tpope commentary
-      { 'tpope/vim-commentary' },
     }
+  },
+  {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons",       -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    },
+    lazy = true,
+  },
+  {
+    "kdheepak/lazygit.nvim",
+    -- optional for floating window border decoration
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
 }, opts)
 

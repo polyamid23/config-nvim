@@ -1,39 +1,9 @@
 local lsp = require('lsp-zero').preset({})
 local lspconfig = require('lspconfig')
 local loaded_configs = require('lspconfig.configs')
+local conform = require('conform')
 
-local function get_config()
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-  return {
-    capabilities = capabilities,
-  }
-end
-
-local function load_custom_configs()
-  local config_files = vim.split(vim.fn.globpath(vim.fn.stdpath('config') .. '/lua/lspconf', '*.lua', true), '\n')
-
-  for _, f in ipairs(config_files) do
-    local name = vim.fn.fnamemodify(f, ':t:r')
-    require('lspconf.' .. name)
-  end
-end
-
-local function setup_default_configs()
-  local available_servers = require('mason-lspconfig').get_installed_servers()
-  for _, server in pairs(available_servers) do
-    if not loaded_configs[server] then
-      local config = get_config()
-      lspconfig[server].setup(config)
-    end
-  end
-end
-
-load_custom_configs()
-setup_default_configs()
-
-lsp.on_attach(function(_, bufnr)
+local on_attach = function(_, bufnr)
   local opts = { buffer = bufnr, remap = false, }
   -- Global mappings.
   -- See `:help vim.diagnostic.*` for documentation on any of the below functions
@@ -55,11 +25,51 @@ lsp.on_attach(function(_, bufnr)
   end, opts)
   vim.keymap.set({ 'n', 'v' }, '<space>ca', vim.lsp.buf.code_action, opts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+
   vim.keymap.set('n', '<space>f', function()
     vim.lsp.buf.format { async = true }
   end, opts)
-end)
 
+  vim.keymap.set('n', '<space>L', ':EslintFixAll<cr>')
+
+  vim.keymap.set('n', '<space>F', function()
+    conform.format()
+  end, opts)
+end
+
+local function get_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+  return {
+    capabilities = capabilities,
+  }
+end
+
+local function load_custom_configs()
+  local config_files = vim.split(vim.fn.globpath(vim.fn.stdpath('config') .. '/lua/lspconf', '*.lua', true), '\n')
+
+  for _, f in ipairs(config_files) do
+    local name = vim.fn.fnamemodify(f, ':t:r')
+    require('lspconf.' .. name)
+  end
+end
+
+local function setup_default_configs()
+  local available_servers = require('mason-lspconfig').get_installed_servers()
+  local config = get_config()
+
+  for _, server in pairs(available_servers) do
+    if not loaded_configs[server] then
+      lspconfig[server].setup(config)
+    end
+  end
+end
+
+load_custom_configs()
+setup_default_configs()
+
+lsp.on_attach(on_attach)
 lsp.setup()
 
 -- You need to setup `cmp` after lsp-zero
@@ -69,7 +79,7 @@ local cmp_action = require('lsp-zero').cmp_action()
 cmp.setup({
   mapping = {
     -- `Enter` key to confirm completion
-    ['<CR>'] = cmp.mapping.confirm({select = false}),
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
 
     -- Ctrl+Space to trigger completion menu
     ['<C-Space>'] = cmp.mapping.complete(),
@@ -79,6 +89,3 @@ cmp.setup({
     ['<C-b>'] = cmp_action.luasnip_jump_backward(),
   }
 })
-
--- Use LspAttach autocommand to only map the following keys
--- after the language server attaches to the current buffer

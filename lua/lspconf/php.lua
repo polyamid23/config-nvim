@@ -7,16 +7,16 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 if not configs.intelephense then
   configs.intelephense = {
     default_config = {
-      cmd = { 'intelephense', '--stdio' };
-      filetypes = { 'php' };
+      cmd = { 'intelephense', '--stdio' },
+      filetypes = { 'php' },
       root_dir = function(fname)
         return vim.loop.cwd()
-      end;
+      end,
       settings = {
         intelephense = {
           files = {
-            maxSize = 1000000;
-          };
+            maxSize = 1000000,
+          },
           environment = {
             includePaths = {
               "/home/serii/Sites/wordpress",
@@ -31,4 +31,3 @@ if not configs.intelephense then
 end
 
 lspconfig.intelephense.setup { capabilities = capabilities }
-
