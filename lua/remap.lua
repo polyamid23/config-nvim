@@ -1,5 +1,5 @@
 vim.keymap.set("n", "<leader>;;", ":Neotree toggle<CR>")
-vim.keymap.set("n", "<leader>kk", ":Neotree reveal<CR>")
+vim.keymap.set("n", "<leader>ll", ":Neotree reveal<CR>")
 
 -- jk to escape
 vim.keymap.set("i", "jk", "<Esc>")
@@ -16,10 +16,12 @@ vim.keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "<C-x>", ":bd<CR>")
 
 -- C-l / C-h to go to nex / previouse buffer
-vim.keymap.set("n", "<C-l>", ":bn<CR>")
-vim.keymap.set("n", "<C-h>", ":bp<CR>")
+vim.keymap.set("n", "<S-L>", ":bn<CR>")
+vim.keymap.set("n", "<S-H>", ":bp<CR>")
 
 -- leader-t-space 2 to set expandtab, shiftwidth, softtabstop to 2
 vim.keymap.set("n", "<leader>t<Space>2", ":set expandtab shiftwidth=2 softtabstop=2<CR>")
 vim.keymap.set("n", "<leader>t<Space>4", ":set expandtab shiftwidth=4 softtabstop=4<CR>")
 vim.keymap.set("n", "<leader>t<Space><Tab>", ":set noexpandtab shiftwidth=4 softtabstop=4<CR>")
+-- LazyGit
+vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
