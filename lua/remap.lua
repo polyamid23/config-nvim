@@ -1,5 +1,4 @@
-vim.keymap.set("n", "<leader>;;", ":Neotree toggle<CR>")
-vim.keymap.set("n", "<leader>kk", ":Neotree reveal<CR>")
+vim.keymap.set("n", "<leader>kk", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
 -- jk to escape
 vim.keymap.set("i", "jk", "<Esc>")

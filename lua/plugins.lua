@@ -45,7 +45,11 @@ require("lazy").setup({
             -- formatter
             {
                 'stevearc/conform.nvim',
-                opts = {},
+                opts = {
+                    formatters_by_ft = {
+                        htmlangular = { "prettier" },
+                    },
+                },
             },
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },     -- Required
@@ -56,14 +60,15 @@ require("lazy").setup({
         }
     },
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-        },
-        lazy = true,
+      'stevearc/oil.nvim',
+      ---@module 'oil'
+      ---@type oil.SetupOpts
+      opts = {},
+      -- Optional dependencies
+      dependencies = { { "echasnovski/mini.icons", opts = {} } },
+      -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+      -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+      lazy = false,
     },
     {
         "ThePrimeagen/harpoon",
@@ -83,7 +88,6 @@ require("lazy").setup({
         ft = { "markdown" },
         build = function() vim.fn["mkdp#util#install"]() end,
     },
-    { 'github/copilot.vim' },
     { 'mhinz/vim-startify' },
 }, opts)
 
