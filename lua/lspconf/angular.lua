@@ -1,5 +1,4 @@
 local lspconfig = require 'lspconfig'
-local configs = require 'lspconfig.configs'
 
 -- Angular requires a node_modules directory to probe for @angular/language-service and typescript
 -- in order to use your projects configured versions.
@@ -51,18 +50,20 @@ local cmd = {
     default_angular_core_version,
 }
 
-lspconfig.angularls.setup({
+local config = {
   cmd = cmd,
   on_new_config = function(new_config,new_root_dir)
     new_config.cmd = cmd
   end,
   on_attach = function()
     for _, server in ipairs(vim.lsp.get_clients()) do
-      if server.name == "tsserver" then
+      if server.name == "ts_ls" then
         local tsserver = vim.lsp.get_client_by_id(server.id)
         tsserver.server_capabilities.renameProvider = false
       end
     end
   end
-})
+}
+
+lspconfig.angularls.setup(config)
 

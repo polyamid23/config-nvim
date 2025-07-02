@@ -11,11 +11,11 @@ vim.opt.smartindent = true
 
 vim.opt.wrap = false
 vim.opt.list = true
+vim.opt.laststatus = 3
 
 vim.opt.swapfile = false
 
 vim.opt.backup = false
--- vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.hlsearch = true
@@ -25,7 +25,7 @@ vim.opt.smartcase = true
 
 vim.opt.termguicolors = true
 
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
 vim.opt.signcolumn = "yes"
 
 vim.opt.updatetime = 50

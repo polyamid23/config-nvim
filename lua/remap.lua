@@ -22,5 +22,6 @@ vim.keymap.set("n", "<S-H>", ":bp<CR>")
 vim.keymap.set("n", "<leader>t<Space>2", ":set expandtab shiftwidth=2 softtabstop=2<CR>")
 vim.keymap.set("n", "<leader>t<Space>4", ":set expandtab shiftwidth=4 softtabstop=4<CR>")
 vim.keymap.set("n", "<leader>t<Space><Tab>", ":set noexpandtab shiftwidth=4 softtabstop=4<CR>")
--- LazyGit
-vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>")
+
+vim.keymap.set("n", "<leader>gt", ":wincmd s<cr> :wincmd T<cr>")
+vim.keymap.set("n", "<leader>tc", ":tabc<cr>")
