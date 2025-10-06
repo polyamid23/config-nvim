@@ -23,5 +23,9 @@ vim.keymap.set("n", "<leader>t<Space>2", ":set expandtab shiftwidth=2 softtabsto
 vim.keymap.set("n", "<leader>t<Space>4", ":set expandtab shiftwidth=4 softtabstop=4<CR>")
 vim.keymap.set("n", "<leader>t<Space><Tab>", ":set noexpandtab shiftwidth=4 softtabstop=4<CR>")
 
-vim.keymap.set("n", "<leader>gt", ":wincmd s<cr> :wincmd T<cr>")
-vim.keymap.set("n", "<leader>tc", ":tabc<cr>")
+vim.keymap.set("n", "<leader>gt", ":wincmd s<CR> :wincmd T<CR>")
+vim.keymap.set("n", "<leader>tc", ":tabc<CR>")
+
+-- copy current file path
+vim.keymap.set("n", "<leader>cp", ":let @+ = expand('%')<CR>")
+
