@@ -41,6 +41,10 @@ require("lazy").setup({
 		},
 	},
 	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		ft = { "markdown", "codecompanion" },
+	},
+	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 	},
@@ -104,13 +108,13 @@ require("lazy").setup({
 			vim.g.db_ui_use_nerd_fonts = 1
 		end,
 	},
-    {
-      "olimorris/codecompanion.nvim",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-treesitter/nvim-treesitter",
-      }
-    },
+	{
+		"olimorris/codecompanion.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	},
 }, opts)
 
 local files = vim.split(vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/plugin", "*.lua", true), "\n")
@@ -119,3 +123,4 @@ for _, f in ipairs(files) do
 	local name = vim.fn.fnamemodify(f, ":t:r")
 	require("plugin." .. name)
 end
+

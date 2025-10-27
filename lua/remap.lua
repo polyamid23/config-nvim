@@ -29,3 +29,7 @@ vim.keymap.set("n", "<leader>tc", ":tabc<CR>")
 -- copy current file path
 vim.keymap.set("n", "<leader>cp", ":let @+ = expand('%')<CR>")
 
+-- code companion
+vim.keymap.set({"n", "v"}, "<leader>cc", ":CodeCompanionChat Toggle<CR>")
+vim.keymap.set("v", "<leader>acc", "<cmd>CodeCompanionChat Add<cr>")
+
