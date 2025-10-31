@@ -1,32 +1,38 @@
-local loaded_configs = require('lspconfig.configs')
-local lspconfig = require('lspconfig')
-local my_config = require('lspconf')
+local my_config = require("lspconf")
 
-local function load_custom_configs()
-    local config_files = vim.split(vim.fn.globpath(vim.fn.stdpath('config') .. '/lua/lspconf', '*.lua', true), '\n')
+local function get_custom_server_names()
+	local config_files = vim.split(vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/lspconf", "*.lua", true), "\n")
+	local custom_servers = {}
 
-    for _, f in ipairs(config_files) do
-        local name = vim.fn.fnamemodify(f, ':t:r')
-        require('lspconf.' .. name)
-    end
+	for _, f in ipairs(config_files) do
+		local name = vim.fn.fnamemodify(f, ":t:r")
+		custom_servers[name] = true
+	end
+
+	return custom_servers
 end
 
-local function setup_default_configs()
-    local available_servers = require('mason-lspconfig').get_installed_servers()
-    local config = my_config
-    local excluded = { angularls = true, roslyn = true }
+local function load_custom_configs()
+	local config_files = vim.split(vim.fn.globpath(vim.fn.stdpath("config") .. "/lua/lspconf", "*.lua", true), "\n")
 
-    for _, server in pairs(available_servers) do
-        if loaded_configs[server] or excluded[server] then
-            goto continue
-        end
-
-        lspconfig[server].setup(config)
-        vim.lsp.config(server, config)
-
-        ::continue::
-    end
+	for _, f in ipairs(config_files) do
+		local name = vim.fn.fnamemodify(f, ":t:r")
+		require("lspconf." .. name)
+	end
 end
 
 load_custom_configs()
-setup_default_configs()
+
+local available_servers = require("mason-lspconfig").get_installed_servers()
+local config = my_config
+local custom_servers = get_custom_server_names()
+-- Always exclude these special cases
+-- custom_servers.stylua = true
+
+for _, server in pairs(available_servers) do
+	if not custom_servers[server] then
+		vim.lsp.config(server, config)
+	end
+
+	vim.lsp.enable(server)
+end

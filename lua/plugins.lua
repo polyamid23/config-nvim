@@ -123,4 +123,3 @@ for _, f in ipairs(files) do
 	local name = vim.fn.fnamemodify(f, ":t:r")
 	require("plugin." .. name)
 end
-

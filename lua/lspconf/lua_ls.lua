@@ -1,8 +1,8 @@
-local lspconfig = require("lspconfig")
 local my_conf = require("lspconf")
 
-lspconfig.lua_ls.setup({
+ vim.lsp.config('lua_ls', {
 	on_attach = my_conf.on_attach,
+	capabilities = my_conf.capabilities,
 	settings = {
 		Lua = {
 			runtime = {
